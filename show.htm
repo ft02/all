@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang=ru>
+ <head>
+ <meta charset=utf-8>
+ <title>Слайдшоу</title>
+ <style>
+  body {
+    margin: 0;
+    background: #000000;
+    //overflow: hidden;
+  }
+  #lf > img {
+    width: 200px;
+  }
+  .bt1 {
+    width: 7%;
+    height: 15%;
+    font-size: 150%;
+    border-radius: 7px;
+  }
+  .bt2 {
+    font-size: 100%;
+    border-radius: 15px;
+  }
+  .bt1, .bt2 {
+    color: green;
+    border: double;
+    border-color: green;
+    background:#e0e0e0;
+  }
+ </style>
+ <script type="module">
+ var tekim=0;             // текущее загружаемое с инета изображение
+ var nfb = 0;             // номер файла из буфера
+ var timsl = 0;           // таймер смены слайдов
+ var sttim = 0;           // таймер шага
+ var sitim = 0;           // таймер изменения размера
+ var pstim = 0;           // таймер шага панорамы
+ var smgoon = true;       // слайдшоу запущено
+ var tef = -1;            // текущий номер слайда (нумерация с нуля)
+ var itef = 0;            // запомнить tef для повторов панорамы
+ var ndf = 1;             // слайды сменяются вперед (1) или назад(-1)
+ var ms = 3000;           // пауза между слайдами в милисекундах
+ var char ="";            // символ строки
+ var sff = "";            // папка и имя файла
+ var ind = false;         // показывать основную информацию
+ var mind = false;        // показывать миниатюры слайдов
+ var vmna = false;        // показывать меню настройки просмотра
+ var insd = false;        // показывать инструкцию слайдшоу
+ var dtw = "";            // дополнение к заголовку окна после имени файла
+ var scom = ";"           // префикс отличающий команду от слайда
+ var tichco = false;      // время отображения изменено командой сценария
+ var nx1 = 1;             // шаг по x
+ var ny1 = 1;             // шаг по y
+ var nstep = 1;           // число шагов
+ var nteks = 0;           // текущий шаг
+ var arect = [];          // массив прямоугольников, текста, изображений, рисуемых по z-index
+ var ekr0 = " ";          // строка исходного ekr1.innerHTML
+ var ngra = 0;            // угол поворота в градусах
+ var npp = 0;             // сколько раз показывать всю панораму
+ var styfo;               // исходный стиль фото
+ var panaco = "";         // параметры панорамы
+ var nsifo = 100;         // базовый размер фонта в пикселях для высоты экрана 1000 пикселей
+ //var oldtop = 0;          // старый fot1.sfyle.top
+ var nbsp = String.fromCharCode(160);
+ shinstr();                                               // показ инструкции
+ window.onload = function() {
+   document.addEventListener('keydown', function(event){
+   //alert("Клавиша "+event.code+" - "+event.keyCode);
+   if(event.code == "KeyM") {minish();}
+   if(event.code == "KeyN") {mena();}
+   if(event.code == "KeyS") {slide();}
+   if(event.code == "KeyI") {inf();}
+   if(event.code == "KeyA") {goback();}
+   if(event.code == "KeyD") {goforw();}
+   if(event.code == "KeyZ") {shinstr();}
+   if(event.code == "F1")   {shinstr();}
+   if(event.code == "KeyW") {gostart();}
+   if(event.code == "KeyX") {goend();}
+   })
+   dtw = decodeURIComponent(location.search.substring(1));
+//   test1();
+   loadmini();       // загрузка всех слайдов в миниатюры
+   for (var ii=0; ii<lf.children.length; ii++) {
+     //images[ii].onload = function(){fl1();};
+     lf.children[ii].onclick = function(){ minicl(this.src);  };
+   }
+   msnum.value = ms/1000;
+   setTimeout(shinstr, ms-100);
+   //alert(decodeURIComponent(location.search.substring(1)));
+   if(decodeURIComponent(location.search.substring(1))=="Припять__1инстр") {shinstr();}
+   timsl = setTimeout(nextf, ms);
+   if(lf.children[0].alt.substr(0,1) === ";"){             // в первой строке команда
+     fot1.style.display="none";
+     instr.style.display = "none";
+     clearTimeout(timsl);
+     //oldtop = fot1.sfyle.top;
+     nextf();
+   }
+   //alert(lf.children[0].alt.substr(0,1));
+ }
+ function test1() {
+   //alert(coruan("123-abc-456-абвгдеёжзийклмнопрстуфхцчшщъыьэюя-АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ-ё-й-щ-ъ-ы-ь-э-ю-я--Ё-Й-Щ-Ъ-Ы-Ь-Э-Ю"));
+   var str1r="123-а-б-в--ё-й-щ-ъ-ы-ь-э-ю-я--Ё-Й-Щ-Ъ-Ы-Ь-Э-Ю";
+   str1r="Эх, ёжик! Дай щюкэ свой ъыьЭЮЯ";
+   str1r="ABCDEFGHIJKLMNOPQRSTUVWXYUZ";
+   str1r="а-б-в-г-д-е-ё-ж-з-и-й-к-л-м-н-о-п-р-с-т-у-ф-х-ц-ч-ш-щ-ъ-ы-ь-э-ю-я-А-Б-В-Г-Д-Е-Ё-Ж-З-И-Й-К-Л-М-Н-О-П-Р-С-Т-У-Ф-Х-Ц-Ч-Ш-Щ-Ъ-Ы-Ь-Э-Ю-Я";
+   str1r="Припять_припять-ПРИПЯТЬ";
+   //str1r="я";
+   str1r="ул героев ул_гидропроектовская ул_дружбы_народов ул_заводская ул_курчатова ул_лазарева ул_ленина ул_леси ул_набережная ул_огнева ул_спортивная ул_строителей ул_энтузиастов";
+   var str1a=coruan(str1r);
+   location.hash = str1a;
+   alert(str1r+"\n"+str1a+"\n"+"coanru(str1a)");
+ }
+ function coruan(sp1) {
+   var srp = "";              // перекодированная результирующая строка
+   var num = 0;
+   var srb = " абвгдеёжзийклмнопрстуфхцчшщъыьэюя"; // а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я
+   var sab = "_abvgde01zijklmnoprstufhc2345y6e78"; // a b v g d e 0 1 z i j k l m n o p r s t u f h c 2 3 4 5 y 6 e 7 8
+   var aab = ['jo','zh','ch','sh','sch','','','ju','ya' , 'JO','ZH','CH','SH','SCH','','','JU','YA'];
+   srb +=    ".АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+   sab +=    "_ABVGDE01ZIJKLMNOPRSTUFHC2345Y6E78";
+   for(var i=0; i<sp1.length; i++) {
+     num = srb.indexOf(sp1[i]);
+     if ( num != -1) {
+       if(parseInt(sab[num]) < 10) {
+         if(num<34) { srp += aab[parseInt(sab[num])]; } else { srp += aab[parseInt(sab[num])+9]; }
+       } else { srp += sab[num]; }
+       
+     } else { srp += sp1[i]; }
+   }
+   return srp;
+ }
+ function coanru2(sp1) {     // раскодирование строки английских символов обратно в русские
+   var num = 0;
+   var ly = false;
+   var st1 = "";
+   var sre = "";                                   //   двойные ё07, й11, щ27, ъ28, ы29, ь30, э31, ю32
+   var srb = " абвгдеёжзийклмнопрстуфхцчшщъыьэюя"; // а б в г д е  ё ж з и  й к л м н о п р с т у ф х ц ч ш  щ  ъ  ы  ь  э  ю я
+   var sab = " abvgdeawziiklmnoprstufhcxqqd.beuj"; // a b v g d e ya w z i yi k l m n o p r s t u f h c x q yq yd yj yb ye yu j
+   srb +=    " АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+   sab +=    " ABVGDEAWZIIKLMNOPRSTUFHCXQQD.BEUJ";
+   for(var i=0; i<sp1.length; i++) {
+       if( sp1[i]=="y" || sp1[i]=="Y" ) {
+         if(sp1[i+1]=="a") { sre += "ё"; }
+         if(sp1[i+1]=="i") { sre += "й"; }
+         if(sp1[i+1]=="q") { sre += "щ"; }
+         if(sp1[i+1]=="d") { sre += "ъ"; }
+         if(sp1[i+1]=="j") { sre += "ы"; }
+         if(sp1[i+1]=="b") { sre += "ь"; }
+         if(sp1[i+1]=="e") { sre += "э"; }
+         if(sp1[i+1]=="u") { sre += "ю"; }
+         if(sp1[i+1]=="A") { sre += "Ё"; }
+         if(sp1[i+1]=="I") { sre += "Й"; }
+         if(sp1[i+1]=="Q") { sre += "Щ"; }
+         if(sp1[i+1]=="D") { sre += "Ъ"; }
+         if(sp1[i+1]=="J") { sre += "Ы"; }
+         if(sp1[i+1]=="B") { sre += "Ь"; }
+         if(sp1[i+1]=="E") { sre += "Э"; }
+         if(sp1[i+1]=="U") { sre += "Ю"; }
+         i += 1; 
+       } else {
+     
+         num = sab.indexOf(sp1[i]);
+         //alert("i="+i+" \n sp1="+sp1+"= \n"+" sp1.length "+sp1.length+" \n sp1[i]="+sp1[i]+"= \n sre="+sre+"=");
+         if ( num != -1) {
+       
+           sre += srb[num];
+         } else { sre += sp1[i]; }
+       }
+   }
+   return sre;
+ }
+ function coruan2(sp1) {     // кодирование строки русских символов в английские
+   var num = 0;
+   var st1 = "";
+   var sre = "";                                   //   двойные ё07, й11, щ27, ъ28, ы29, ь30, э31, ю32
+   var srb = " абвгдеёжзийклмнопрстуфхцчшщъыьэюя"; // а б в г д е  ё ж з и  й к л м н о п р с т у ф х ц ч ш  щ  ъ  ы  ь  э  ю я
+   var sab = " abvgdeawziiklmnoprstufhcxqqdjbeuj"; // a b v g d e ya w z i yi k l m n o p r s t u f h c x q yq yd yj yb ye yu j
+   srb +=    " АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+   sab +=    " ABVGDEAWZIIKLMNOPRSTUFHCXQQDJBEUJ";
+   for(var i=0; i<sp1.length; i++) {
+     num = srb.indexOf(sp1[i]);
+     if ( num != -1) {
+       if( num==7  || num==11 || num==27 || num==28 || num==29 || num==30 || num==31 || num==32 ) { sre += "y"; }
+       if( num==41 || num==45 || num==61 || num==62 || num==63 || num==64 || num==65 || num==66 ) { sre += "Y"; }
+       sre += sab[num];
+     } else { sre += sp1[i]; }
+   }
+   return sre;
+ }
+ function loadmini() {        // загрузка всех слайдов в миниатюры
+   var ii = 0;
+   for(ii=2; ii<adfo.children.length-1; ii+=2) {    // предварительно создать для загрузки каждого слайда свою миниатюру
+     //alert(ii+" ii - ii+1 inner text "+adfo.children[ii+1].innerText);
+     lf.innerHTML += '<img src="load1.jpg" width=200 alt="'+adfo.children[ii+1].innerText+'">';
+   }
+   //lf.children[tekim].src=adfo.children[2*tekim+2].innerText;
+   //if(adfo.children[2*tekim+2].innerText.substr(0,1)!==scom){lf.children[tekim].src=adfo.children[2*tekim+2].innerText;}
+   formin();
+   loadnext();
+ }
+ function formin() {
+   var srcfil1=cmdjpg.src;       // файл из команды
+     if(adfo.children[2*tekim+2].innerText.substr(0,1)!==scom){
+       lf.children[tekim].src=adfo.children[2*tekim+2].innerText;
+       } else {
+         lf.children[tekim].src=cmdjpg.src;
+         lf.children[tekim].alt=adfo.children[2*tekim+2].innerText+";"+adfo.children[2*tekim+3].innerText;
+         // если файл задан в параметре "file=" , то загрузить заданный файл в миниатюру
+         var sco=adfo.children[2*tekim+2].innerText+";"+adfo.children[2*tekim+3].innerText;
+         var aco = sco.split(";");
+         for(var i1=3; i1<aco.length; i1++){
+           if(aco[i1].substr(0,5)=="file="){
+             srcfil1=aco[i1].substr(5);
+           }
+         }
+         lf.children[tekim].src=srcfil1;
+       }
+ }
+ function loadnext() {
+   if(lf.children[tekim].complete) {
+     ld1.innerText += "-"+tekim;
+     //if(tekim==3) { nextf(); }
+     tekim+=1;
+     formin();
+   }
+   if(tekim<lf.children.length-1) {setTimeout(loadnext,200);}
+ }
+ function minicl(p1) {
+   var str=p1;
+   for (var ii=0; ii<lf.children.length; ii++) {
+     if(lf.children[ii].src == p1) {tef=ii;}
+   }
+   if(smgoon) {tef-=ndf;}
+   nextf();
+ }
+ function gostart() {
+   minf(nbsp+nbsp+'Переход к первому фото'+nbsp+nbsp,1000); tef = lf.children.length + 2; smgoon=true; nextf(); smgoon=false;
+ }
+ function goend() {
+   minf(nbsp+nbsp+'Переход к последнему фото'+nbsp+nbsp,1000); tef = -2; smgoon=true; nextf(); smgoon=false;
+ }
+ function goback() {
+   minf(nbsp+nbsp+'Перелистывание назад'+nbsp+nbsp,1000);
+   ndf=-1;
+   if(!smgoon) { nextnum(); }
+   nextf();
+   rndf.value = "назад";
+   if(smgoon) {slsh.value="включен";}
+   if(!smgoon) {slsh.value="выключен";}
+ }
+ function goforw() {
+   minf(nbsp+nbsp+'Перелистывание вперед'+nbsp+nbsp,1000);
+   ndf=1;
+   if(!smgoon) { nextnum(); }
+   nextf();
+   rndf.value = "вперед";
+   if(smgoon) {slsh.value="включен";}
+   if(!smgoon) {slsh.value="выключен";}
+ }
+ function shinstr() {            // показ инструкции
+   var ii = (window.innerWidth-876) / 2;   // левая кооодината окна краткой инструкции
+   if(ii < 1) { ii=1; }
+   instr.style.left = ii + 'px';
+   insd = !insd;
+   if(insd) {instr.style.display = "block";}
+   if(!insd) {instr.style.display = "none";}
+ }
+ function minish() {            // показ миниатюр
+   mind = !mind;
+   if(mind) {lf.style.display = "block";}
+   if(!mind) {lf.style.display = "none";}
+   if(mind) {vmin.value="включен";}
+   if(!mind) {vmin.value="выключен";}
+ }
+   function minf(stri, tim) {
+    di.children[0].innerText = stri;
+    di.style.display = "block";
+    di.style.left = ((window.innerWidth / 2 ) - 100) + 'px';
+    setTimeout(function(){cwmi();}, tim);
+  }
+ function cwmi() { di.style.display = "none"; }
+ function inf() {
+    ind = !ind;
+    if(ind)  { oi.style.display = "block"; }
+    if(!ind) { oi.style.display = "none"; }
+    return;
+  }
+  function nextnum() {
+    tef = tef + ndf;
+    if(tef<0) { tef=lf.children.length-1; }
+    if(tef>=lf.children.length) {tef=0; ekr1.innerHTML = " "; arect.length = 0;}
+  }
+ function fifo() {               // подгонка размеров фото под текущий размер окна 
+  var fnw = fot1.naturalWidth;
+  var fnh = fot1.naturalHeight;
+  var koef = 0.995;              // уменьшить высоту чтобы не появился вертикальный слайдер
+  var f1w = 0;                   // результирующая ширина фото
+  var f1h = 0;                   // результирующая высота фото
+  if(fnw/fnh > 1)  {
+    f1w = window.innerWidth;
+    f1h = f1w * fnh / fnw;
+    if(f1h > window.innerHeight * koef) {
+      f1h = window.innerHeight * koef;
+      f1w = f1h * fnw / fnh;
+    }
+  }
+  
+  if(fnw/fnh <= 1) {
+    f1h = window.innerHeight * koef;
+    f1w = f1h * fnw / fnh;
+    if(f1w > window.innerWidth) {
+      f1w = window.innerWidth;
+      f1h = f1w * fnh / fnw;
+    }
+  }
+  fot1.height = f1h; fot1.width = f1w;
+  
+ }
+ function fifo1(sfot,ntrw,ntrh) {               // подгонка размеров фото с id=sfot под размер окна = ntrw x ntrh
+  var fnw = eval(sfot).naturalWidth;
+  var fnh = eval(sfot).naturalHeight;
+  var koef = 2;                  // уменьшить высоту чтобы не появился вертикальный слайдер
+  var f1w = 0;                   // результирующая ширина фото
+  var f1h = 0;                   // результирующая высота фото
+  if(fnw/fnh > 1)  {
+    f1w = ntrw-koef;
+    f1h = f1w * fnh / fnw;
+    if(f1h > ntrh) {
+      f1h = ntrh-koef;
+      f1w = f1h * fnw / fnh;
+    }
+  }
+  
+  if(fnw/fnh <= 1) {
+    f1h = ntrh-koef;
+    f1w = f1h * fnw / fnh;
+    if(f1w > ntrw) {
+      f1w = ntrw-koef;
+      f1h = f1w * fnh / fnw;
+    }
+  }
+  eval(sfot).height = f1h; eval(sfot).width = f1w;
+ }
+ function step1(nx,ny,ntime,txt0){
+   nx1 = parseInt(txt0.style.left) + 1*nx;
+   ny1 = parseInt(txt0.style.top) + 1*ny;
+   nteks +=1;
+   if(nteks<=nstep){
+     txt0.style.left = nx1+"px";
+     txt0.style.top = ny1+"px";
+     sttim = setTimeout(step1, ntime, nx, ny, ntime, txt0);
+   } 
+ }
+ function size1(nsize,ntime,nstep,nmax,txt0,aco){
+   if(nstep<=nmax){
+     var nx1 = 1*Number(txt0.style.fontSize.replace("%","")) +1*nsize;
+     txt0.style.fontSize = nx1 + "%";
+     if(aco[1] !== "text"){
+       txt0.style.width = 1*Number(txt0.style.width.replace("px","")) +1*nsize+"px";
+       txt0.style.height = 1*Number(txt0.style.height.replace("px","")) +1*nsize+"px";
+     }
+     sitim = setTimeout(size1, ntime, nsize, ntime, nstep+1, nmax, txt0,aco);
+   }
+ }
+ function fitrot(siz,numa){       // подгонка фото под размер окна шириной numa после поворота
+   var ntrw=5000;      // требуемая ширина картинки
+   var nkoef = eval(siz).naturalWidth / eval(siz).naturalHeight;
+   var i1 = 0;         // ограничитель числа итераций
+   var ntrw1 = 0;      // прошлое значение
+   var ntrw2 = 0;      // текущее значение в формуле подбора
+   var ntmax = ntrw;
+   var ntmin = 0;
+   while(i1<41){
+     ntrw2 = ntrw*Math.sin(0.0174533*ngra)/nkoef+ntrw*Math.sin(0.0174533*(90-ngra));
+     if(ntrw2 > numa){
+       ntrw1 = ntrw;
+       ntrw = (ntmax+ntmin)/2;
+       ntmax = ntrw1;
+       } else {
+         ntrw1 = ntrw;
+         ntrw = (ntmax+ntmin)/2;
+         ntmin = ntrw1;
+       }
+     i1 += 1;
+   }
+   return ntrw;
+ }
+ function styco(sidl,aco){                       // стили объектов, движение, изменение размера
+   var ntime=0;
+   var i2=0;
+   var stran="";                                 // строка всех трансформаций
+   var apco = [];                                // массив параметров команды
+   var nwfr = 0;                                 // ширина фото для поворота
+   var nsme = 0;                                 // смещение фото вниз после поворота
+   var nhw = 0;                                  // ширина окна
+   var nhh = 0;                                  // высота окна
+   var nko = 0;                                  // коэф масштаба относительно окна
+   var ndx = 0;                                  // коэф по x по ширине
+   var ndy = 0;                                  // коэф по y по высоте
+   ngra = 0;
+   //console.log("test "+sidl);
+   fot1.style.display = "none";
+   nhw = window.innerWidth;
+   nhh = window.innerHeight;
+   if(sidl !== "cmd1") {eval(sidl).style.transform = stran;}       // у панорамы нет sidl
+   for(var i1=1; i1<aco.length; i1++){
+     if(aco[i1].substr(0,5)=="file="){
+       ekr1.innerHTML = ekr0 + '<img src="'+aco[i1].substr(5)+'" alt="rect..." id="'+sidl+'" style="position: absolute;">';
+     }
+     eval(sidl).innerText = aco[3];
+     
+     if(aco[i1].substr(0,7)=="rotate="){
+       ngra = aco[i1].substr(7);
+       nwfr = fitrot(sidl,window.innerWidth);
+       eval(sidl).width = nwfr;
+       eval(sidl).height = nwfr * eval(sidl).naturalHeight / eval(sidl).naturalWidth;
+       // найти смещение фото вниз после поворота, чтобы фото всё было видно на экране
+       nsme = Math.sin(0.0174533*(90-ngra))*nwfr * eval(sidl).naturalHeight / eval(sidl).naturalWidth;
+       nsme += nwfr*Math.sin(0.0174533*ngra) - nwfr * eval(sidl).naturalHeight / eval(sidl).naturalWidth;
+       nsme = nsme /2;
+       eval(sidl).style.top = nsme+"px";             // компенсация подъема угла при повороте
+       stran += ' rotate('+ngra+'deg)';
+       }
+     if(aco[i1].substr(0,11)=="fontWeight="){eval(sidl).style.fontWeight = aco[i1].substr(11);}
+     //if(aco[i1].substr(0,10)=="marginTop="){eval(sidl).style.marginTop = aco[i1].substr(10)+"px";}
+     //.style.textShadow = "5px 5px 1px #ff0000, 10px 10px 1px #0000ff";
+     if(aco[i1].substr(0,4)=="pan="){pan(aco[i1]);}
+     if(aco[i1].substr(0,9)=="fontSize="){eval(sidl).style.fontSize = (nhw >= nhh ? nhh : nhw) * Number(aco[i1].substr(9)) / 10 +"px";}
+     if(aco[i1].substr(0,5)=="left="){eval(sidl).style.left = aco[i1].substr(5)+"px";}
+     if(aco[i1].substr(0,4)=="top="){eval(sidl).style.top = aco[i1].substr(4)+"px";}
+     if(aco[i1].substr(0,3)=="xs="){eval(sidl).style.width = aco[i1].substr(3);}
+     if(aco[i1].substr(0,3)=="ys="){eval(sidl).style.height = aco[i1].substr(3);}
+     if(aco[i1].substr(0,2)=="x="){eval(sidl).width = aco[i1].substr(2);}
+     if(aco[i1].substr(0,2)=="y="){eval(sidl).height = aco[i1].substr(2);}
+     if(aco[i1].substr(0,6)=="color="){eval(sidl).style.color = aco[i1].substr(6);}
+     if(aco[i1].substr(0,7)=="radius="){eval(sidl).style.borderRadius = aco[i1].substr(7)+"px";}
+     if(aco[i1].substr(0,11)=="background="){eval(sidl).style.background = aco[i1].substr(11);}
+     if(aco[i1].substr(0,8)=="z-index="){eval(sidl).style.zIndex = aco[i1].substr(8);}
+     if(aco[i1].substr(0,8)=="opacity="){eval(sidl).style.opacity = aco[i1].substr(8);}
+     if(aco[i1].substr(0,5)=="ring=" || aco[i1].substr(0,5)=="rect="){
+       //nhw = window.innerWidth;
+       //nhh = window.innerHeight;
+       nko = Number(aco[i1].substr(5));
+       i2 = nhw >= nhh ? nko*nhh : nko*nhw;
+       if(nko<=0){i2 = -nko;}
+       //alert("aco[i1].substr(5)="+aco[i1].substr(5)+"   i2="+i2);
+       if(aco[i1].substr(0,5)=="ring="){eval(sidl).style.borderRadius = i2+"px";}
+       eval(sidl).style.width = i2+"px";
+       eval(sidl).style.height = i2+"px";
+       eval(sidl).innerText = " ";
+       //alert("eval(sidl).style.left = "+ eval(sidl).style.left);
+       eval(sidl).style.left = (nhw-i2)/2+"px";
+       eval(sidl).style.top = (nhh-i2)/2+"px";
+     }
+     if(aco[i1].substr(0,3)=="dy="){
+       ndy = Number(aco[i1].substr(3));
+       eval(sidl).style.top = i2 * ndy + Number(eval(sidl).style.top.replace("px","")) +"px";
+     }
+     if(aco[i1].substr(0,3)=="dx="){
+       //alert("do "+eval(sidl).style.left);
+       ndx = Number(aco[i1].substr(3));
+       eval(sidl).style.left = i2 * ndx + Number(eval(sidl).style.left.replace("px","")) +"px";
+       //alert("posle "+eval(sidl).style.left);
+       //alert("nhw="+nhw+"\n nhh="+nhh+"\n eval(sidl).style.width="+eval(sidl).style.width+" \n ndx*nhw="+ndx*nhw);
+     }
+     if(aco[i1].substr(0,5)=="oval="){eval(sidl).style.height = aco[i1].substr(5)+"px";}
+     if(aco[i1].substr(0,6)=="skewx="){stran += ' skewX('+aco[i1].substr(6)+'deg)';}
+     if(aco[i1].substr(0,6)=="skewy="){stran += ' skewY('+aco[i1].substr(6)+'deg)';}
+     if(aco[i1].substr(0,6)=="movex="){stran += ' translateX('+aco[i1].substr(6)+'px)';}
+     if(aco[i1].substr(0,6)=="movey="){stran += ' translateY('+aco[i1].substr(6)+'px)';}
+     if(aco[i1].substr(0,7)=="scalex="){stran += ' scaleX('+aco[i1].substr(7)+')';}
+     if(aco[i1].substr(0,7)=="scaley="){stran += ' scaleY('+aco[i1].substr(7)+')';}
+     if(aco[i1].substr(0,6)=="scale="){stran += ' scaleY('+aco[i1].substr(6)+') scaleX('+aco[i1].substr(6)+')';}
+     //alert(sidl+"="+aco[i1]);
+     if(sidl !== "cmd1") {eval(sidl).style.transform = stran;}     //  у панорамы нет sidl
+     if(aco[i1].substr(0,5)=="time="){         // время отображения
+       ntime=aco[i1].substr(5);
+       tichco = true;
+       clearTimeout(timsl);
+       timsl = setTimeout(nextf, ntime);
+     }
+     
+     if(aco[i1].substr(0,5)=="step="){           // пошаговое движение
+       var stx = 2;     // шаг по x
+       var sty = 2;     // шаг по y
+       var stt = 1000;  // время шага в мсек
+       apco = aco[i1].split(",");
+       nstep = apco[0].substr(5);
+       for(i2=0; i2<apco.length; i2++){
+         if(apco[i2].substr(0,2)=="x="){stx=apco[i2].substr(2);}
+         if(apco[i2].substr(0,2)=="y="){sty=apco[i2].substr(2);}
+         if(apco[i2].substr(0,2)=="t="){stt=apco[i2].substr(2);}
+       }
+       nteks = 0;
+       sttim = setTimeout(step1, stt, stx, sty, stt, eval(sidl)); 
+     }
+     
+     if(aco[i1].substr(0,5)=="clip="){           // показывать часть изображения
+       var x1=100;
+       var y1=100;
+       var x2=100;
+       var y2=100;
+       apco = aco[i1].split(",");
+       for(i2=1; i2<apco.length; i2++){
+         if(apco[i2].substr(0,3)=="p1="){x1=apco[i2].substr(3);}
+         if(apco[i2].substr(0,3)=="p2="){y1=apco[i2].substr(3);}
+         if(apco[i2].substr(0,3)=="p3="){x2=apco[i2].substr(3);}
+         if(apco[i2].substr(0,3)=="p4="){y2=apco[i2].substr(3);}
+       }
+       eval(sidl).style.clip = ' rect('+x1+'px, '+y1+'px, '+x2+'px, '+y2+'px)';
+       //alert(' rect('+x1+'px, '+y1+'px, '+x2+'px, '+y2+'px)');
+     }
+     
+     if(aco[i1].substr(0,5)=="size="){           // изменение размера
+       var nmax = 1;       // сколько раз изменять размер
+       var nsize = 100;    // на сколько % изменять размер
+       var asico = aco[i1].split(",");
+       var nmax = asico[0].substr(5);
+       ntime = 1;          // время изменения в мсек
+       for(i2=1; i2<asico.length; i2++){
+         if(asico[i2].substr(0,2)=="x="){nsize=asico[i2].substr(2);}
+         if(asico[i2].substr(0,2)=="t="){ntime=asico[i2].substr(2);}
+       }
+       sitim = setTimeout(size1, ntime, nsize, ntime, 1, nmax, eval(sidl), aco);
+     }
+   }
+   //alert(aco[1]+" "+eval(sidl).style.left);
+ }
+ function pan(aco){                 //     П а н о р а м а
+   var npart = 2;                   // сколько фото в панораме
+   var nt = 10;                     // время сдвига
+   var nx = -1;                     // на сколько пикселей сдвигать
+   var nle = 0;                     // левая позиция текущего фото в панораме
+   var np1 = 1000;                  // пауза до панорамы
+   var np2 = 1000;                  // пауза после панорамы
+   var nr = 1;                      // количество повторений панорамы
+   var nbr = 20;                    // радиус бордюра экрана панорамы
+   var nko = 1;                     // 3 -> высота панорамы равна высоте экрана
+   var apco = aco.split(",");
+   panaco = aco;
+   smgoon = false;                  // остановить слайдшоу пока показ панорамы
+   fot1.style.display = "none";
+   for(var i2=0; i2<apco.length; i2++){
+     if(apco[i2].substr(0,4)=="pan="){npart = Number(apco[i2].substr(4));}
+     if(apco[i2].substr(0,3)=="p1="){np1 = apco[i2].substr(3);}
+     if(apco[i2].substr(0,3)=="p2="){np2 = apco[i2].substr(3);}
+     if(apco[i2].substr(0,3)=="br="){nbr = apco[i2].substr(3);}
+     if(apco[i2].substr(0,2)=="t="){nt = apco[i2].substr(2);}
+     if(apco[i2].substr(0,2)=="x="){nx = apco[i2].substr(2);}
+     if(apco[i2].substr(0,2)=="r="){nr = apco[i2].substr(2);}
+     if(apco[i2].substr(0,2)=="k="){nko = apco[i2].substr(2);}
+   }
+   if(npp == 0){npp = nr; itef = tef;}       // если npp=0 то это первый запуск панорамы
+     nle = 0;
+     tef = itef;
+     for(i2=1; i2<npart+1; i2++){
+       eval("pafo"+i2).src = lf.children[tef].src;
+       fifo1(("pafo"+i2),nko*window.innerWidth,window.innerHeight);   // панорама во всю высоту окна
+       eval("pafo"+i2).style.top = "0px";
+       eval("pafo"+i2).style.left = nle + "px";
+       nle += eval("pafo"+i2).width;
+       eval("pafo"+i2).style.display = "block";
+       if(i2<npart) {nextnum();}
+     }
+     nle = (nle - eval("pafo"+(i2-1)).width) / Math.abs(nx);
+     pasc1.style.width = window.innerWidth+"px";             // ширина блока отображения панорамы
+     pasc1.style.height = pafo1.height+"px";                 // высота блока отображения панорамы
+     pasc1.style.borderRadius = nbr+"px";
+     //pasc1.style.top = "50px";   pasc1.style.left = "50px";
+     fot1.src = pafo1.src;                                      // это для правильного отображения размеров
+     fifo1("fot1",nko*window.innerWidth,window.innerHeight);    // фото панорамы в окне основной информации
+     pstim = setTimeout(panmove, np1, nt, nx, nle, npart, np2);
+ }
+ function panmove(ntime, nsize, nend1, npart, np2){
+   var i1 = 0;
+   i1 = Number(eval("pafo"+npart).style.left.replace("px",""))+eval("pafo"+npart).width;
+   if(i1 >= window.innerWidth){
+     for(var i2=1; i2<npart+1; i2++){
+       eval("pafo"+i2).style.left=(Number(eval("pafo"+i2).style.left.replace("px",""))+1*nsize)+"px";
+     }
+     pstim = setTimeout(panmove, ntime, ntime, nsize, nend1-1, npart, np2);
+   } else {
+     npp -=1;
+     if(npp > 0){ pan(panaco); }
+     if(npp <= 0){
+       smgoon = true;         // запустить слайдшоу
+       timsl = setTimeout(nextf, np2);
+     }
+   }
+ }
+ function thiscmd(scmd){
+   var aco = scmd.split(";");
+   var sidl = "";
+   var stxt = "test";
+   var nrot = 90;                                // градусы поворота
+   var i1 = 1;
+   //alert(scmd);
+   switch(aco[1]) {
+     case 'clear':                                // очистка всех rect, text, img
+           
+           break;
+     case 'tst1':                                // 
+           
+           break;
+     case 'tst2':                                // 
+           
+           break;
+     case 'command':
+     case 'cmd':
+     case 'ring':
+     case 'pict':
+     case 'text':
+     case 'rect':                                // прямоугольники, текст и IMG с z-index (rect1, rect2, ...rect999...)
+           sidl = "rect"+aco[2];
+           if(aco[1]=="command" || aco[1]=="cmd") {sidl = "cmd"+tef;}   // у cmd нет своего sidl, формируем из tef
+           ekr0 = ekr1.innerHTML;
+           if(!arect.includes(aco[2], 0)) {
+             arect.push(aco[2]);
+             ekr1.innerHTML +='<span id="'+sidl+'" style="z-index: -2; position: absolute; top: 0px; left: 0px; color: green; background:#d0f0ff;"> </span>';
+           }
+           styco(sidl,aco);
+           break;
+     default:
+           
+           txt1.innerText='Фото';
+           break;
+   }
+ }
+  //--------------------------------------------следующее фото---------------------------------------------------------
+  //   file:///C:/temp/foto_alboms/show1.htm?__test_#__test3
+ function nextf() {
+  if(smgoon) { nextnum(); }
+  gonum.value = tef+1;
+  msnum.value = ms/1000;
+  pafo1.style.display="none";
+  pafo2.style.display="none";
+  pafo3.style.display="none";
+  pafo4.style.display="none";
+  pafo5.style.display="none";
+  pafo6.style.display="none";
+  pafo7.style.display="none";
+  pafo8.style.display="none";
+  pafo9.style.display="none";
+  fot1.style.width = "";
+  fot1.style.height = "";
+  styfo=fot1.style;
+  var s1 = decodeURIComponent(lf.children[tef].alt.replaceAll('%','@@@')).replaceAll('@@@','%');
+  if(s1.substr(0,1)==scom){
+    thiscmd(s1);
+  } else {
+    fot1.src=lf.children[tef].src;
+    fifo1("fot1",window.innerWidth,window.innerHeight);
+    fot1.style.display="block";
+    thiscmd(s1);
+  }
+  //window.scroll(0,0);
+  fot1.style.left = (window.innerWidth - fot1.width)/2+"px";
+  sff = lf.children[tef].alt.replace(/(воркута )|(при5 )|(припять )|(schekino )/i , "") + " " + dtw;
+  document.title = decodeURIComponent((tef+1)+"-"+lf.children.length+" "+sff.replaceAll('%','@@@')).replaceAll('@@@','%');
+  var stri = '<br><span style="font-size:170%;"></span><span style="font-size:130%;">'+lf.children[tef].alt + "</span><br>";
+  stri += '<span style="font-size:130%;"></span>';
+  var ii = lf.children[tef].src.lastIndexOf("/");
+  //stri += lf.children[tef].src + "\n";
+  stri += "Файл : " + decodeURIComponent(lf.children[tef].src.substring(ii+1)) + "<br>";
+  stri += "Путь к файлу : " + decodeURIComponent(lf.children[tef].src.substring(0,ii+1)) + "<br>";
+  stri += " Размеры текущего файла : " + lf.children[tef].naturalWidth + " x " + lf.children[tef].naturalHeight + " пикселов. <br>";
+  stri += " Размеры изображения "+nbsp+nbsp+" : " + fot1.width + " x " + fot1.height + " пикселов. <br>";
+  stri += " Размеры окна браузера "+nbsp+nbsp+" : "+window.innerWidth + " x " + window.innerHeight + " пикселов. <br>";
+  stri += " Текущий размер экрана "+nbsp+" : "+window.screen.availWidth + " x " + window.screen.availHeight + " пикселов.<br>";
+  var stri2 = "выключен"; if( smgoon ) { stri2 = nbsp+nbsp+" включен"; }
+  stri += " Режим слайдшоу "+nbsp.repeat(7)+" : " +nbsp.repeat(15)+ stri2 + "<br>";
+  stri2 = "обратное"; if( ndf==1 ) { stri2 = "прямое"; }
+  stri += " Направление перелистывания слайдшоу - " + stri2 + "<br>";
+  stri += " Слайды меняются через каждые " + ms/1000 + " секунд.<br>";
+  stri += " Номер файла : " + tef + "\xa0" + "\xa0" + " Всего файлов в слайдшоу : " + lf.children.length + "<br>";
+  stri += '<span style="font-size:130%;"></span>';
+  oi.children[1].innerHTML = stri;
+  ii = (window.innerWidth-380) / 2;   // левая кооодината окна основной информации
+  if(ii < 1) { ii=1; }
+  oi.style.left = ii + 'px';
+  if(!tichco) {
+    if(smgoon) { clearTimeout(timsl); timsl = setTimeout(nextf, ms); }
+  }
+  tichco = false;
+  if(!smgoon) {clearTimeout(timsl);}
+}
+ function slide() {
+   smgoon = !smgoon;
+   if(smgoon) {slsh.value="включен";}
+   if(!smgoon) {slsh.value="выключен";}
+   nextf();
+ }
+  function foc() {
+    //alert("Click! "+event.clientX);
+    var wh = window.innerHeight;
+    var ww = window.innerWidth;
+    if(event.clientX < ww * 0.3 && event.clientY < wh * 0.3) { gostart(); }  // СЗ на первый слайд
+     if(event.clientX > ww * 0.3 && event.clientX < ww * 0.6 && event.clientY < wh * 0.3) {
+       inf(); } // СС окно информации
+       if(event.clientX > ww * 0.6 && event.clientY < wh * 0.3) { goend(); }  // СВ на последний слайд
+      if(event.clientX < ww * 0.3 && event.clientY > wh * 0.3) {
+       minf(nbsp+nbsp+'Перелистывание назад'+nbsp+nbsp,1000); goback(); } // ЗЗ и ЮЗ
+    if(event.clientX > ww * 0.3 && event.clientX < ww * 0.6 && event.clientY > wh * 0.3) {
+     let stri = ' ';
+     if(ndf==1) { stri = nbsp + 'в прямом';
+      } else { stri = nbsp + 'в обратном'; }
+     stri = ' Режим слайдшоу ' + "\n" + stri + ' направлении' + nbsp + "\n";
+     if(smgoon) { stri = stri + 'выключен ' };
+     if(!smgoon) { stri = stri + 'включен '};
+     minf(stri,3000); slide(); } // ЦЦ и ЮЮ
+     if(event.clientX > ww * 0.6 && event.clientY > wh * 0.3) {
+     minf(nbsp+nbsp+'Перелистывание вперед'+nbsp+nbsp,1000); goforw(); } // ВВ и ЮВ
+    return;
+  }
+  function mena() {
+    vmna = !vmna;
+    nast.style.left = ((window.innerWidth / 2 ) - 370) + 'px';
+    if(vmna) {nast.style.display = "block";}
+    if(!vmna) {nast.style.display = "none";}
+    if(tef<0) { tef=0; }
+    if(tef>=lf.children.length) {tef=lf.children.length-1;}
+    gonum.value = tef+1;
+    if(ndf == 1) {rndf.value = "вперед";}
+    if(ndf == -1) {rndf.value = "назад";}
+  }
+  function fundf() {
+    if(ndf == 1) {
+      goback();
+    } else {
+        goforw();}
+  }
+  function funson() {
+    if(tef<0) { tef=0; }
+    if(tef>=lf.children.length) {tef=lf.children.length-1;}
+    nextf();
+  }
+  //fot1.onload = function() { fl1(); }
+  msnum.onchange = function() { ms=1000*msnum.value; }   // Изменение времени смены слайдов
+  gonum.onchange = function() { if(ndf==1) {tef=+gonum.value-ndf;} if(ndf==-1) {tef=+gonum.value+ndf;} }  // Изменение номера текущего слайда
+  fot1.onclick = function() { foc(); }                   // Нажатие левой кнопки мыши на изображении
+  fot1.ondblclick = function() { mena(); }               // Двойное нажатие левой кнопки мыши на изображении
+  fot1.oncontextmenu = function() { mena(); }            // Нажатие правой кнопки мыши на изображении
+  oi.onclick = function() { inf(); }                     // Нажатие окна основной информации
+  sona.onclick = function() { funson(); }                // Нажатие кнопки сохранения настроек
+  exna.onclick = function() { mena(); }                  // Нажатие кнопки выхода из настроек
+  slsh.onclick = function() { slide(); }                 // Нажатие кнопки режима слайдшоу
+  vmin.onclick = function() { minish(); }                // Нажатие кнопки режима миниатюр
+  rndf.onclick = function() { fundf(); }                 // Нажатие кнопки направления перелистывания
+  gop1.onclick = function() { tef+=1; gonum.value = tef+1; window.scroll(0,0); }       // Нажатие кнопки +1 к номеру текущего слайда
+  gop10.onclick = function() { tef+=10; gonum.value = tef+1; }     // Нажатие кнопки +10 к номеру текущего слайда
+  gop100.onclick = function() { tef+=100; gonum.value = tef+1; }   // Нажатие кнопки +100 к номеру текущего слайда
+  gom1.onclick = function() { tef-=1; gonum.value = tef+1; }       // Нажатие кнопки -1 к номеру текущего слайда
+  gom10.onclick = function() { tef-=10; gonum.value = tef+1; }     // Нажатие кнопки -10 к номеру текущего слайда
+  gom100.onclick = function() { tef-=100; gonum.value = tef+1; }   // Нажатие кнопки -100 к номеру текущего слайда
+  msm1.onclick = function() {ms-=1000; if(ms<0){ms=0;} msnum.value = ms/1000; }   // Нажатие кнопки -1 к времени смены слайдов
+  msp1.onclick = function() { ms+=1000; msnum.value = ms/1000; }   // Нажатие кнопки +1 к времени смены слайдов
+  //fot1.oncontextmenu = function() { window.history.go(-1); }     // Нажатие правой кнопки мыши на изображении
+ </script>
+ </head>
+ <body>
+  <div id="instr" style="z-index: 0; position: absolute; top: 220px; padding: 10px; background:#d0f0d0; color: green; border-radius: 20px; border: double; display: none;">
+    <b><center>Краткое описание управления :</center>
+       <center>Нажатие клавиши "F1" - показать или убрать этот текст (или клавиша "Z" или "Я").</center>
+       Управление осуществляется нажатием левой кнопки мыши на разные участки слайда или клавишами клавиатуры.<br>
+       Для управления, слайд условно разделяется на три части по ширине - левая часть, средняя часть, правая часть.<br>
+       Так же слайд условно разделяется на три части по высоте - верхняя часть, средняя часть, нижняя часть.<br>
+       Нажатие на левую верхнюю часть слайда вызывает переход к первому слайду в слайдшоу &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (клавиша W или Ц).<br>
+       Нажатие на правую верхнюю часть слайда вызывает переход к последнему слайду в слайдшоу &nbsp; &nbsp;(клавиша Х или Ч).<br>
+       Нажатие на среднюю верхнюю часть слайда вызывает/убирает окно с основной информацией &nbsp; &nbsp; (клавиша I или Ш).<br>
+       Нажатие на левую нижнюю часть слайда вызывает движение слайдов в обратном направлении &nbsp;(клавиша A или Ф).<br>
+       Нажатие на правую нижнюю часть слайда вызывает движение слайдов в прямом направлении &nbsp; (клавиша D или В).<br>
+       Нажатие на среднюю нижнюю часть слайда останавливает/запускает смену слайдов слайдшоу &nbsp; &nbsp;(клавиша S или Ы).<br>
+       Нажатие на слайд правой кнопкой мыши вызывает/убирает настройки отображения слайдшоу &nbsp; (клавиша N или Т).
+  </b></div>
+  <center>
+  <div id="oi" style="z-index: 1; position: absolute; top: 100px; border-radius: 20px; padding: 10px; background:#d0f0d0; color: green; display: none; border: double;">
+   <b>Основная информация:</b>
+   <span>  </span>
+   <span> ( версия от 23 августа 2022 г. )</span>
+  </div>
+  <div id="di" style="position: absolute; border-radius: 20px; padding: 1px; background:#808080; color: #f0f0f0; display: none; border: double;">
+   <div>Дополнительная информация</div>
+  </div>
+  <img id="cmdjpg" src="cmd1.jpg" alt="Команда." style="width: 10px; display: none">                 <!--- картинка команды --->
+  <span id="ekr1" style="position: absolute; left: 0px; top: 0px; color: green;"><b> </b></span>     <!--- все rect text img --->
+  <img id="fot1" src="load1.jpg" style="z-index: 0;" alt="Текущая фотография.">  <!--- текущий отображаемый слайд --->
+  <div id="pasc1" style="position: absolute; left: 0px; top: 0px; overflow: hidden; border-radius: 20px;"> <!--- экран панорамы --->
+    <img id="pafo1" src="load1.jpg" style="z-index: 0; position: absolute; display: none;" alt="панфот1">
+    <img id="pafo2" src="load1.jpg" style="z-index: 0; position: absolute; display: none;" alt="панфот2">
+    <img id="pafo3" src="load1.jpg" style="z-index: 0; position: absolute; display: none;" alt="панфот3">
+    <img id="pafo4" src="load1.jpg" style="z-index: 0; position: absolute; display: none;" alt="панфот4">
+    <img id="pafo5" src="load1.jpg" style="z-index: 0; position: absolute; display: none;" alt="панфот5">
+    <img id="pafo6" src="load1.jpg" style="z-index: 0; position: absolute; display: none;" alt="панфот6">
+    <img id="pafo7" src="load1.jpg" style="z-index: 0; position: absolute; display: none;" alt="панфот7">
+    <img id="pafo8" src="load1.jpg" style="z-index: 0; position: absolute; display: none;" alt="панфот8">
+    <img id="pafo9" src="load1.jpg" style="z-index: 0; position: absolute; display: none;" alt="панфот9">
+  </div>
+  <div id="txt1" style="font-size: 200%; position: absolute; left: 0px; top: 0px; color: green; display: none;">txt1</div>
+  </center>
+ <p id="ld1" style="display: none">Загрузка: &nbsp;</p>                        <!--- блок отображения номеров загруженных файлов --->
+ <div id="nast" style="font-size: 175%; position: absolute; top: 100px; border-radius: 20px; padding: 10px; color: green; background:#d0f0d0; display: none; border: double;">
+   <center><b>Настройки просмотра:</b></center><br>
+   <b>Перейти к слайду: 
+   <input class="bt1" id="gom100" type="button" value="-">
+   <input class="bt1" id="gom10" type="button" value="-">
+   <input class="bt1" id="gom1" type="button" value="-">
+   <input class="bt2" id="gonum" type="text" size="1">
+   <input class="bt1" id="gop1" type="button" value="+">
+   <input class="bt1" id="gop10" type="button" value="+">
+   <input class="bt1" id="gop100" type="button" value="+">
+   </b><br><br>
+   <b>Слайды меняются через
+   <input class="bt1" id="msm1" type="button" value="-">
+   <input class="bt2" id="msnum" type="text" size="1">
+   <input class="bt1" id="msp1" type="button" value="+">
+    секунд</b>
+   <br><br><b>Направление перелистывания слайдшоу - 
+   <input class="bt2" id="rndf" type="button" value="вперед">
+   <br><br><b>Режим слайдшоу
+   <input class="bt2" id="slsh" type="button" value="включен">
+   <br><br><b>Режим миниатюр
+   <input class="bt2" id="vmin" type="button" value="выключен"><br><br>
+   <center><input id="sona" class="bt2" type="button" value="Выполнить"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+   <input id="exna" class="bt2" type="button" value="Закрыть"></center>
+ </div>
+ <!--- родительский блок миниатюр, каждому слайду по миниатюре --->
+ <p id="lf" style="display: none;"></p>
+  <!--- загрузка файла с адресами и описаниями фото файлов для этого слайдшоу хранящихся на сервере --->
+ <p id="adfo" style="color: green; display: none;">
+   <!--- <script>document.write("\<script src=\""+decodeURIComponent(location.search.substring(1))+".js\"></script\>");</script> --->
+   <!--- <script>document.write("\<script src=\""+decodeURIComponent(location.search.substring(1)).replace("__","/").replace("Припять.","pripyat2").replace("Припять","pripyat")+".js\"></script\>");</script> --->
+   <script defer>document.write("\<script src=\""+decodeURIComponent(location.hash).replace("#__","")+".js\"></script\>");</script>
+ </p>
+ </body>
+</html>
