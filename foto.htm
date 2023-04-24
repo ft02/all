@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang=ru>
+  <head>
+  <meta charset=utf-8>
+  <title>Фотоальбомы</title>
+  <style>
+    body {
+  	  margin: 0;
+  	  font-size: 1em;
+  	  color: #e0c090;
+  	  background: url('titul.jpg');
+  	  //background-size: 100%;
+    }
+    A:link { text-decoration: none; color: #805030; font-weight: 900; }
+    A:visited { text-decoration: none; color: #805030; font-weight: 900; }
+    A:active { text-decoration: none; color: #805030; font-weight: 900; }
+    A:hover { text-decoration: underline; color: #c00000; font-weight: 900; }
+     .bm, .bc, .bt {
+       width: 200px;
+       height: 40px;
+       border-width: 4px;
+       border-radius: 30px;
+       border-style: solid;
+       border-color: #805030;
+       font-size: 32px;
+       color: #805030;
+       font-weight: 600;
+       background-color: #dfdfdf;
+     }
+     .sp1 { height: 15px; }
+     .sp2 { letter-spacing: 50px; }
+     .sp3 { height: 9px; }
+   </style>
+   <script type="module">
+     var ndb = 2;                  // отображение 1=imgbb; 2=comss;
+     var tbl = "zero";             // текущий отображаемый блок
+     window.onload = function() {
+       serv1.innerText = tbl;
+       clzs();                     // смена сайта источника фото
+     }
+     zbzs.onclick = function() { clzs(); }     // смена сайта источника фото
+     zb1980.onclick = function() { ndb==1 ? allnone('1980') : allnone('1980c') }
+     zb1990.onclick = function() { ndb==1 ? allnone('1990') : allnone('1990c') }
+     zb2000.onclick = function() { ndb==1 ? allnone('2000') : allnone('2000c') }
+     zb2010.onclick = function() { ndb==1 ? allnone('2010') : allnone('2010c') }
+     zb2020.onclick = function() { ndb==1 ? allnone('2020') : allnone('2020c') }
+     function clzs() {
+       ndb+=1;
+       if(ndb> 2) { ndb=1; }
+       if(ndb==1) { skyf.innerText="imgbb"; a1960.href="show.htm?__Фото__1960-е__#__foto/1960-et"; a1970.href="show.htm?__Фото__1970-е__#__foto/1970-et"; }
+       if(ndb==2) { skyf.innerText="comss"; a1960.href="show.htm?__Фото__1960-е__#__fotc/1960-et"; a1970.href="show.htm?__Фото__1960-е__#__fotc/1970-et"; }
+       tbl.length==4 ? tbl+="c" : tbl=tbl.substr(0,4)
+       allnone(tbl);
+     }
+     function allnone(sp1) {
+       blzero.style.display='none'; blzeroc.style.display='none';     // пустые подблоки для блоков 1960 и 1970
+       bl1980.style.display='none'; bl1980c.style.display='none';
+       bl1990.style.display='none'; bl1990c.style.display='none';
+       bl2000.style.display='none'; bl2000c.style.display='none';
+       bl2010.style.display='none'; bl2010c.style.display='none';
+       bl2020.style.display='none'; bl2020c.style.display='none';
+       tbl = sp1;
+       eval("bl"+sp1+".style.display='block'");
+     }
+   </script>
+  </head>
+  <body>
+    <span id='zbzs' style="font-size: 3em;"><b style="position:absolute;"> &nbsp;&nbsp; Фото</b></span><br>
+    <span class="sp2"> &nbsp; &nbsp;</span><span id='skyf' style="font-size: 1em;">imgbb</span><br><br>
+    <a id='a1960' class="bt" href=show.htm?1960 target=_blank> &nbsp; &nbsp; &nbsp; &nbsp;1960-e &nbsp; &nbsp; &nbsp; </a><div class="sp1"> </div>
+    <a id='a1970' class="bt" href=show.htm?1970 target=_blank> &nbsp; &nbsp; &nbsp; &nbsp;1970-e &nbsp; &nbsp; &nbsp; </a><div class="sp1"> </div>
+    <div id='zb1980' class="bt"><center>1980-e</center></div> <div class="sp1"> </div>
+    <div id='zb1990' class="bt"><center>1990-e</center></div> <div class="sp1"> </div>
+    <div id='zb2000' class="bt"><center>2000-e</center></div> <div class="sp1"> </div>
+    <div id='zb2010' class="bt"><center>2010-e</center></div> <div class="sp1"> </div>
+    <div id='zb2020' class="bt"><center>2020-e</center></div> <div class="sp1"> </div>
+    <a class="bm" href=show.htm?foto__1960-et target=_blank> &nbsp; &nbsp; &nbsp; &nbsp;Разное &nbsp; &nbsp; &nbsp; </a><div class="sp1"> </div>
+    <a class="bm" href=show.htm?Припять__1инстр target=_blank>&nbsp; Управление &nbsp; </a><div class="sp1"> </div>
+    <div id="blzero"  style="position:absolute; top:10px; left:410px; display: none"> </div>
+    <div id="blzeroc" style="position:absolute; top:10px; left:410px; display: none"> </div>
+    <div id="bl1980" style="position:absolute; top:10px; left:410px; display: none">
+    <a class="bm" href=show.htm?__Фото__1980-BW01_Тула__#__foto/1980-BW01rt-TULA target=_blank>&nbsp;&nbsp;1980_Тула_Свердлова&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1980-BW02_Путина__#__foto/1980-BW02rt-PUTINA target=_blank>&nbsp;&nbsp;1980_Новый_год_у_Путиных&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW03_Селиваново_1__#__foto/1981-BW03rt-SELIVANOVO target=_blank>&nbsp;&nbsp;1981_Селиваново_1&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW04_Селиваново_2__#__foto/1981-BW04rt-SELIVANOVO target=_blank>&nbsp;&nbsp;1981_Селиваново_2&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW05_Воронка__#__foto/1981-BW05rt-VORONKA target=_blank>&nbsp;&nbsp;1981_Воронка_26_июня&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW06_Колхоз_1__#__foto/1981-BW06rt-KOLHOZ target=_blank>&nbsp;&nbsp;1981_Колхоз_1&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW07_Колхоз_2__#__foto/1981-BW07rt-KOLHOZ target=_blank>&nbsp;&nbsp;1981_Колхоз_2&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW08_Колхоз_3__#__foto/1981-BW08rt-KOLHOZ target=_blank>&nbsp;&nbsp;1981_Колхоз_3&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1982-BW09_Февраль__#__foto/1982-BW09rt-FEBRUARY target=_blank>&nbsp;&nbsp;1982_февраль_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1982-BW10_Март__#__foto/1982-BW10rt-MART target=_blank>&nbsp;&nbsp;1982_март_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1982-BW11_Сентябрь__#__foto/1982-BW11rt-SEPTEMBER target=_blank>&nbsp;&nbsp;1982_сентябрь_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1982-BW12_Ноябрь__#__foto/1982-BW12rt-NOVEMBER target=_blank>&nbsp;&nbsp;1982_ноябрь_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW13_Март__#__foto/1983-BW13rt-MART target=_blank>&nbsp;&nbsp;1983_март_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW14_Май__#__foto/1983-BW14rt-MAJ target=_blank>&nbsp;&nbsp;1983_май_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW15_Геленджик__#__foto/1983-BW15rt-GELENDJIK target=_blank>&nbsp;&nbsp;1983_Геленджик&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW16_Дача_Олега__#__foto/1983-BW16rt-DACHA target=_blank>&nbsp;&nbsp;1983_дача_Олега&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW17_Сентябрь__#__foto/1983-BW17rt-SEPTEMBER target=_blank>&nbsp;&nbsp;1983_сентябрь_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW18_Серпухов_декабрь__#__foto/1983-BW18rt-DECEMBER target=_blank>&nbsp;&nbsp;1983_декабрь_Серпухов&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-S_Геленджик_август__#__foto/1983-Srt_avgust_Gelengjk target=_blank>&nbsp;&nbsp;1983_август_Геленджик&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-S_Воркута_сентябрь__#__foto/1983-Srt_september_Vorkuta target=_blank>&nbsp;&nbsp;1983_сентябрь_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1984_Армия__#__foto/1984-ARM-01rt target=_blank>&nbsp;&nbsp;1984_армия&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1984-BW19_Леша_июнь__#__foto/1984-BW19rt-JUNI-LESHA target=_blank>&nbsp;&nbsp;1984_июнь_Лёша&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1984-BW20_Леша_октябрь__#__foto/1984-BW20rt-OKTOBER-LESHA target=_blank>&nbsp;&nbsp;1984_октябрь_Лёша&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1984-BW21_Ноябрь_Ю__#__foto/1984-BW21rt-NOVEMBER-U target=_blank>&nbsp;&nbsp;1984_ноябрь_Ю&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1984-S_Тула_ноябрь__#__foto/1984-Srt_november_Tula target=_blank>&nbsp;&nbsp;1984_ноябрь_Тула_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-BW22_Серпухов_июнь__#__foto/1985-BW22rt-JUNI-SERPUHOV target=_blank>&nbsp;&nbsp;1985_июнь_Серпухов&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-BW23_Геленджик_июль__#__foto/1985-BW23rt-JULI-GELENDJIK target=_blank>&nbsp;&nbsp;1985_июль_Геленджик&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-BW24_Декабрь_ВГФЭ_1__#__foto/1985-BW24rt-DECEMBER-VGFE1 target=_blank>&nbsp;&nbsp;1985_декабрь_ВГФЭ_1&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-BW25_Декабрь_ВГФЭ_2__#__foto/1985-BW25rt-DECEMBER-VGFE2 target=_blank>&nbsp;&nbsp;1985_декабрь_ВГФЭ_2&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-S_5_Тула_май__#__foto/1985-S_05rt_maj_Tula target=_blank>&nbsp;&nbsp;1985_май_Тула_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-S_6_Свадьба_Серпухов_июнь__#__foto/1985-S_06rt_juni_svadba_Ab target=_blank>&nbsp;&nbsp;1985_июнь_Серпухов_свадьба_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-S_7_Геленджик_июль__#__foto/1985-S_07rt_juli_Gelendjik target=_blank>&nbsp;&nbsp;1985_июль_Геленджик_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-S_9_Воркута_сентябрь__#__foto/1985-S_09rt_september_Vorkuta target=_blank>&nbsp;&nbsp;1985_сентябрь_Воркута_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1986-BW26_Воркута_февраль__#__foto/1986-BW26rt-FEBRUAR-VORKUTA target=_blank>&nbsp;&nbsp;1986_февраль_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1986-S_Тула_июль__#__foto/1986-Srt_juli_Tula target=_blank>&nbsp;&nbsp;1986_июль_Тула_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1987-S_Тула_июль__#__foto/1987-Srt_juli_Tula target=_blank>&nbsp;&nbsp;1987_июль_Тула_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1988-Тула__#__foto/1988rt-Tula target=_blank>&nbsp;&nbsp;1988_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1988-S_Тула__#__foto/1988-Srt_juli_Tula target=_blank>&nbsp;&nbsp;1988_июль_Тула_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1989-Тула__#__foto/1989rt-Tula target=_blank>&nbsp;&nbsp;1989_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1989-S_X__#__foto/1989-S_Xrt target=_blank>&nbsp;&nbsp;1989_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__198X-X__#__foto/198Xrt target=_blank>&nbsp;&nbsp;198X_разное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    </div>
+    <div id="bl1980c" style="position:absolute; top:15px; left:410px; display: none">
+    <a class="bm" href=show.htm?__Фото__1980-BW01_Тула__#__fotc/1980-BW01rt-TULA target=_blank>&nbsp;&nbsp;1980_Тула_Свердлова&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1980-BW02_Путина__#__fotc/1980-BW02rt-PUTINA target=_blank>&nbsp;&nbsp;1980_Новый_год_у_Путиных&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW03_Селиваново_1__#__fotc/1981-BW03rt-SELIVANOVO target=_blank>&nbsp;&nbsp;1981_Селиваново_1&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW04_Селиваново_2__#__fotc/1981-BW04rt-SELIVANOVO target=_blank>&nbsp;&nbsp;1981_Селиваново_2&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW05_Воронка__#__fotc/1981-BW05rt-VORONKA target=_blank>&nbsp;&nbsp;1981_Воронка_26_июня&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW06_Колхоз_1__#__fotc/1981-BW06rt-KOLHOZ target=_blank>&nbsp;&nbsp;1981_Колхоз_1&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW07_Колхоз_2__#__fotc/1981-BW07rt-KOLHOZ target=_blank>&nbsp;&nbsp;1981_Колхоз_2&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1981-BW08_Колхоз_3__#__fotc/1981-BW08rt-KOLHOZ target=_blank>&nbsp;&nbsp;1981_Колхоз_3&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1982-BW09_Февраль__#__fotc/1982-BW09rt-FEBRUARY target=_blank>&nbsp;&nbsp;1982_февраль_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1982-BW10_Март__#__fotc/1982-BW10rt-MART target=_blank>&nbsp;&nbsp;1982_март_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1982-BW11_Сентябрь__#__fotc/1982-BW11rt-SEPTEMBER target=_blank>&nbsp;&nbsp;1982_сентябрь_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1982-BW12_Ноябрь__#__fotc/1982-BW12rt-NOVEMBER target=_blank>&nbsp;&nbsp;1982_ноябрь_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW13_Март__#__fotc/1983-BW13rt-MART target=_blank>&nbsp;&nbsp;1983_март_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW14_Май__#__fotc/1983-BW14rt-MAJ target=_blank>&nbsp;&nbsp;1983_май_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW15_Геленджик__#__fotc/1983-BW15rt-GELENDJIK target=_blank>&nbsp;&nbsp;1983_Геленджик&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW16_Дача_Олега__#__fotc/1983-BW16rt-DACHA target=_blank>&nbsp;&nbsp;1983_дача_Олега&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW17_Сентябрь__#__fotc/1983-BW17rt-SEPTEMBER target=_blank>&nbsp;&nbsp;1983_сентябрь_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-BW18_Серпухов_декабрь__#__fotc/1983-BW18rt-DECEMBER target=_blank>&nbsp;&nbsp;1983_декабрь_Серпухов&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-S_Геленджик_август__#__fotc/1983-Srt_avgust_Gelengjk target=_blank>&nbsp;&nbsp;1983_август_Геленджик&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1983-S_Воркута_сентябрь__#__fotc/1983-Srt_september_Vorkuta target=_blank>&nbsp;&nbsp;1983_сентябрь_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1984_Армия__#__fotc/1984-ARM-01rt target=_blank>&nbsp;&nbsp;1984_армия&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1984-BW19_Леша_июнь__#__fotc/1984-BW19rt-JUNI-LESHA target=_blank>&nbsp;&nbsp;1984_июнь_Лёша&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1984-BW20_Леша_октябрь__#__fotc/1984-BW20rt-OKTOBER-LESHA target=_blank>&nbsp;&nbsp;1984_октябрь_Лёша&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1984-BW21_Ноябрь_Ю__#__fotc/1984-BW21rt-NOVEMBER-U target=_blank>&nbsp;&nbsp;1984_ноябрь_Ю&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1984-S_Тула_ноябрь__#__fotc/1984-Srt_november_Tula target=_blank>&nbsp;&nbsp;1984_ноябрь_Тула_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-BW22_Серпухов_июнь__#__fotc/1985-BW22rt-JUNI-SERPUHOV target=_blank>&nbsp;&nbsp;1985_июнь_Серпухов&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-BW23_Геленджик_июль__#__fotc/1985-BW23rt-JULI-GELENDJIK target=_blank>&nbsp;&nbsp;1985_июль_Геленджик&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-BW24_Декабрь_ВГФЭ_1__#__fotc/1985-BW24rt-DECEMBER-VGFE1 target=_blank>&nbsp;&nbsp;1985_декабрь_ВГФЭ_1&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-BW25_Декабрь_ВГФЭ_2__#__fotc/1985-BW25rt-DECEMBER-VGFE2 target=_blank>&nbsp;&nbsp;1985_декабрь_ВГФЭ_2&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-S_5_Тула_май__#__fotc/1985-S_05rt_maj_Tula target=_blank>&nbsp;&nbsp;1985_май_Тула_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-S_6_Свадьба_Серпухов_июнь__#__fotc/1985-S_06rt_juni_svadba_Ab target=_blank>&nbsp;&nbsp;1985_июнь_Серпухов_свадьба_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-S_7_Геленджик_июль__#__fotc/1985-S_07rt_juli_Gelendjik target=_blank>&nbsp;&nbsp;1985_июль_Геленджик_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1985-S_9_Воркута_сентябрь__#__fotc/1985-S_09rt_september_Vorkuta target=_blank>&nbsp;&nbsp;1985_сентябрь_Воркута_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1986-BW26_Воркута_февраль__#__fotc/1986-BW26rt-FEBRUAR-VORKUTA target=_blank>&nbsp;&nbsp;1986_февраль_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1986-S_Тула_июль__#__fotc/1986-Srt_juli_Tula target=_blank>&nbsp;&nbsp;1986_июль_Тула_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1987-S_Тула_июль__#__fotc/1987-Srt_juli_Tula target=_blank>&nbsp;&nbsp;1987_июль_Тула_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1988-Тула__#__fotc/1988rt-Tula target=_blank>&nbsp;&nbsp;1988_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1988-S_Тула__#__fotc/1988-Srt_juli_Tula target=_blank>&nbsp;&nbsp;1988_июль_Тула_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1989-Тула__#__fotc/1989rt-Tula target=_blank>&nbsp;&nbsp;1989_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1989-S_X__#__fotc/1989-S_Xrt target=_blank>&nbsp;&nbsp;1989_слайды&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__198X-X__#__fotc/198Xrt target=_blank>&nbsp;&nbsp;198X_разное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    </div>
+    <div id="bl1990" style="position:absolute; top:10px; left:410px; display: none">
+    <a class="bm" href=show.htm?__Фото__1992_июль_Тамань__#__foto/1992-BW27rt-JULI-TAMAN target=_blank>&nbsp;&nbsp;1992_июль_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1993_Тамань__#__foto/1993rt-Taman target=_blank>&nbsp;&nbsp;1993_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1993_Тула__#__foto/1993rt-Tula target=_blank>&nbsp;&nbsp;1993_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1994_Polaroid__#__foto/1994rt-POLAROID target=_blank>&nbsp;&nbsp;1994_Polaroid&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1995_26_июня_ПФР__#__foto/1995-CN01rt-06-26-4392-PFR target=_blank>&nbsp;&nbsp;1995_26_июня_ПФР&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1995_Polaroid__#__foto/1995rt-POLAROID target=_blank>&nbsp;&nbsp;1995_Polaroid&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1996_Тула__#__foto/1996-CN02rt-7277-TULA target=_blank>&nbsp;&nbsp;1996_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1996_Тамань__#__foto/1996-CN03rt-9029-TAMAN target=_blank>&nbsp;&nbsp;1996_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1996_1997_Воркута__#__foto/1996-CN04rt-1997-4819-VORKUTA target=_blank>&nbsp;&nbsp;1996_1997_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1996_Polaroid__#__foto/1996t-POLAROID target=_blank>&nbsp;&nbsp;1996_Polaroid&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1997_Тула_Тамань__#__foto/1997-CN05t-1528-TULA-TAMAN target=_blank>&nbsp;&nbsp;1997_Тула_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1997_Тамань_Воркута__#__foto/1997-CN06t-1529-TAMAN-VORKUTA target=_blank>&nbsp;&nbsp;1997_Тамань_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1997_25_августа_Бородянский__#__foto/1997t-08-25-BMI target=_blank>&nbsp;&nbsp;1997_25_августа_Бородянский&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_31_декабря_ПФР__#__foto/1998-CN07t-12-31-7290-PFR target=_blank>&nbsp;&nbsp;1998_31_декабря_ПФР&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_Воркута_1__#__foto/1998-CN08t-1378-VORKUTA target=_blank>&nbsp;&nbsp;1998_Воркута_1&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_Воркута_2__#__foto/1998-CN09t-5901-VORKUTA target=_blank>&nbsp;&nbsp;1998_Воркута_2&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_Воркута_Тула__#__foto/1998-CN10t-1123-VORKUTA-TULA target=_blank>&nbsp;&nbsp;1998_Воркута_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_Тула_Тамань__#__foto/1998-CN11t-3678-TULA-TAMAN target=_blank>&nbsp;&nbsp;1998_Тула_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_Тамань_Воркута__#__foto/1998-CN12t-7314-TAMAN-VORKUTA target=_blank>&nbsp;&nbsp;1998_Тамань_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1999_Воркута__#__foto/1999-CN13t-3231-VORKUTA target=_blank>&nbsp;&nbsp;1999_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1999_Тула_Тамань__#__foto/1999-CN14t-0142-TULA-TAMAN target=_blank>&nbsp;&nbsp;1999_Тула_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1999_Тамань__#__foto/1999-CN15t-4332-TAMAN target=_blank>&nbsp;&nbsp;1999_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1999_Тамань_Геленджик__#__foto/1999-CN16t-3196-TAMAN-GELEND target=_blank>&nbsp;&nbsp;1999_Тамань_Геленджик&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1990_199X_разное_#__foto/199Xt target=_blank>&nbsp;&nbsp;199X_разное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    </div>
+    <div id="bl1990c" style="position:absolute; top:15px; left:410px; display: none">
+    <a class="bm" href=show.htm?__Фото__1992_июль_Тамань__#__fotc/1992-BW27rt-JULI-TAMAN target=_blank>&nbsp;&nbsp;1992_июль_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1993_Тамань__#__fotc/1993rt-Taman target=_blank>&nbsp;&nbsp;1993_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1993_Тула__#__fotc/1993rt-Tula target=_blank>&nbsp;&nbsp;1993_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1994_Polaroid__#__fotc/1994rt-POLAROID target=_blank>&nbsp;&nbsp;1994_Polaroid&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1995_26_июня_ПФР__#__fotc/1995-CN01rt-06-26-4392-PFR target=_blank>&nbsp;&nbsp;1995_26_июня_ПФР&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1995_Polaroid__#__fotc/1995rt-POLAROID target=_blank>&nbsp;&nbsp;1995_Polaroid&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1996_Тула__#__fotc/1996-CN02rt-7277-TULA target=_blank>&nbsp;&nbsp;1996_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1996_Тамань__#__fotc/1996-CN03rt-9029-TAMAN target=_blank>&nbsp;&nbsp;1996_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1996_1997_Воркута__#__fotc/1996-CN04rt-1997-4819-VORKUTA target=_blank>&nbsp;&nbsp;1996_1997_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1996_Polaroid__#__fotc/1996t-POLAROID target=_blank>&nbsp;&nbsp;1996_Polaroid&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1997_Тула_Тамань__#__fotc/1997-CN05t-1528-TULA-TAMAN target=_blank>&nbsp;&nbsp;1997_Тула_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1997_Тамань_Воркута__#__fotc/1997-CN06t-1529-TAMAN-VORKUTA target=_blank>&nbsp;&nbsp;1997_Тамань_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1997_25_августа_Бородянский__#__fotc/1997t-08-25-BMI target=_blank>&nbsp;&nbsp;1997_25_августа_Бородянский&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_31_декабря_ПФР__#__fotc/1998-CN07t-12-31-7290-PFR target=_blank>&nbsp;&nbsp;1998_31_декабря_ПФР&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_Воркута_1__#__fotc/1998-CN08t-1378-VORKUTA target=_blank>&nbsp;&nbsp;1998_Воркута_1&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_Воркута_2__#__fotc/1998-CN09t-5901-VORKUTA target=_blank>&nbsp;&nbsp;1998_Воркута_2&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_Воркута_Тула__#__fotc/1998-CN10t-1123-VORKUTA-TULA target=_blank>&nbsp;&nbsp;1998_Воркута_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_Тула_Тамань__#__fotc/1998-CN11t-3678-TULA-TAMAN target=_blank>&nbsp;&nbsp;1998_Тула_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1998_Тамань_Воркута__#__fotc/1998-CN12t-7314-TAMAN-VORKUTA target=_blank>&nbsp;&nbsp;1998_Тамань_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1999_Воркута__#__fotc/1999-CN13t-3231-VORKUTA target=_blank>&nbsp;&nbsp;1999_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1999_Тула_Тамань__#__fotc/1999-CN14t-0142-TULA-TAMAN target=_blank>&nbsp;&nbsp;1999_Тула_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1999_Тамань__#__fotc/1999-CN15t-4332-TAMAN target=_blank>&nbsp;&nbsp;1999_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1999_Тамань_Геленджик__#__fotc/1999-CN16t-3196-TAMAN-GELEND target=_blank>&nbsp;&nbsp;1999_Тамань_Геленджик&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__1990_199X_разное_#__fotc/199Xt target=_blank>&nbsp;&nbsp;199X_разное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    </div>
+    <div id="bl2000" style="position:absolute; top:10px; left:410px; display: none">
+    <a class="bm" href=show.htm?__Фото__2000_Воркута__#__foto/2000-CN17t-4957-VORKUTA target=_blank>&nbsp;&nbsp;2000_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2000_Тула_Тамань__#__foto/2000-CN18t-2960-TULA-TAMAN target=_blank>&nbsp;&nbsp;2000_Тула_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2000_Тамань_Тула__#__foto/2000-CN19t-4142-TAMAN-TULA target=_blank>&nbsp;&nbsp;2000_Тамань_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2001_Воркута__#__foto/2001-CN20t-1787-VORKUTA target=_blank>&nbsp;&nbsp;2001_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2001_Воркута_Тамань__#__foto/2001-CN21t-9063-VORKUTA-TAMAN target=_blank>&nbsp;&nbsp;2001_Воркута_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2002_Воркута_Тамань__#__foto/2002-CN22t-9998-VORKUTA-TAMAN target=_blank>&nbsp;&nbsp;2002_Воркута_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div> 
+    <a class="bm" href=show.htm?__Фото__2003_Воркута_Тамань__#__foto/2003-CN23t-3380-VORKUTA-TAMAN target=_blank>&nbsp;&nbsp;2003_Воркута_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2003_Тамань__#__foto/2003-CN24t-1654-TAMAN target=_blank>&nbsp;&nbsp;2003_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2004_Воркута_Тамань__#__foto/2004-CN25t-0675-VORKUTA-TAMAN target=_blank>&nbsp;&nbsp;2004_Воркута_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2004_Тамань__#__foto/2004-CN26t-3077-TAMAN target=_blank>&nbsp;&nbsp;2004_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2004_Тамань_Воркута__#__foto/2004-CN27t-2005-1626-TAMAN-VORKUTA target=_blank>&nbsp;&nbsp;2004_Тамань_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2005_Воркута__#__foto/2005-CN28t-1647-VORKUTA target=_blank>&nbsp;&nbsp;2005_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2005_Воркута_Тамань__#__foto/2005-CN29t-2690-VORKUTA-TAMAN target=_blank>&nbsp;&nbsp;2005_Воркута_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2005_Воркута__#__foto/2005-CN30t-2066-VORKUTA target=_blank>&nbsp;&nbsp;2005_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2005_Тамань_Воркута__#__foto/2005-CN31t-06-1396-TAMAN-VORKUTA target=_blank>&nbsp;&nbsp;2005_Тамань_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2005__#__foto/2005rt target=_blank>&nbsp;&nbsp;2005_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2006__#__foto/2006rt target=_blank>&nbsp;&nbsp;2006_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2007__#__foto/2007rt target=_blank>&nbsp;&nbsp;2007_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2008__#__foto/2008rt target=_blank>&nbsp;&nbsp;2008_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2009__#__foto/2009rt target=_blank>&nbsp;&nbsp;2009_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    </div>
+    <div id="bl2000c" style="position:absolute; top:15px; left:410px; display: none">
+    <a class="bm" href=show.htm?__Фото__2000_Воркута__#__fotc/2000-CN17t-4957-VORKUTA target=_blank>&nbsp;&nbsp;2000_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2000_Тула_Тамань__#__fotc/2000-CN18t-2960-TULA-TAMAN target=_blank>&nbsp;&nbsp;2000_Тула_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2000_Тамань_Тула__#__fotc/2000-CN19t-4142-TAMAN-TULA target=_blank>&nbsp;&nbsp;2000_Тамань_Тула&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2001_Воркута__#__fotc/2001-CN20t-1787-VORKUTA target=_blank>&nbsp;&nbsp;2001_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2001_Воркута_Тамань__#__fotc/2001-CN21t-9063-VORKUTA-TAMAN target=_blank>&nbsp;&nbsp;2001_Воркута_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2002_Воркута_Тамань__#__fotc/2002-CN22t-9998-VORKUTA-TAMAN target=_blank>&nbsp;&nbsp;2002_Воркута_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div> 
+    <a class="bm" href=show.htm?__Фото__2003_Воркута_Тамань__#__fotc/2003-CN23t-3380-VORKUTA-TAMAN target=_blank>&nbsp;&nbsp;2003_Воркута_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2003_Тамань__#__fotc/2003-CN24t-1654-TAMAN target=_blank>&nbsp;&nbsp;2003_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2004_Воркута_Тамань__#__fotc/2004-CN25t-0675-VORKUTA-TAMAN target=_blank>&nbsp;&nbsp;2004_Воркута_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2004_Тамань__#__fotc/2004-CN26t-3077-TAMAN target=_blank>&nbsp;&nbsp;2004_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2004_Тамань_Воркута__#__fotc/2004-CN27t-2005-1626-TAMAN-VORKUTA target=_blank>&nbsp;&nbsp;2004_Тамань_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2005_Воркута__#__fotc/2005-CN28t-1647-VORKUTA target=_blank>&nbsp;&nbsp;2005_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2005_Воркута_Тамань__#__fotc/2005-CN29t-2690-VORKUTA-TAMAN target=_blank>&nbsp;&nbsp;2005_Воркута_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2005_Воркута__#__fotc/2005-CN30t-2066-VORKUTA target=_blank>&nbsp;&nbsp;2005_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2005_Тамань_Воркута__#__fotc/2005-CN31t-06-1396-TAMAN-VORKUTA target=_blank>&nbsp;&nbsp;2005_Тамань_Воркута&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2005__#__fotc/2005rt target=_blank>&nbsp;&nbsp;2005_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2006__#__fotc/2006rt target=_blank>&nbsp;&nbsp;2006_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2007__#__fotc/2007rt target=_blank>&nbsp;&nbsp;2007_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2008__#__fotz/2008rt target=_blank>&nbsp;&nbsp;2008_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2009__#__fotz/2009rt target=_blank>&nbsp;&nbsp;2009_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    </div>
+    <div id="bl2010" style="position:absolute; top:10px; left:410px; display: none">
+    <a class="bm" href=show.htm?__Фото__2010__#__foto/2010rt target=_blank>&nbsp;&nbsp;2010_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2011__#__foto/2011rt target=_blank>&nbsp;&nbsp;2011_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2011_Рудник__#__foto/2011-rudnikt target=_blank>&nbsp;&nbsp;2011_Рудник&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2011_Атамань__#__foto/2011-t_atamant target=_blank>&nbsp;&nbsp;2011_Атамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2012__#__foto/2012rt target=_blank>&nbsp;&nbsp;2012_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2013__#__foto/2013rt target=_blank>&nbsp;&nbsp;2013_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2013_Щёкино__#__foto/2013-schekino-dnt target=_blank>&nbsp;&nbsp;2013_Щёкино&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2014__#__foto/2014rt target=_blank>&nbsp;&nbsp;2014_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2014_Атамань__#__foto/2014-ataman-dnt target=_blank>&nbsp;&nbsp;2014_Атамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2014_Воздремо__#__foto/2014-vozdremo-dnt target=_blank>&nbsp;&nbsp;2014_Воздремо&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2014_Щёкино__#__foto/2014-schekino-dnt target=_blank>&nbsp;&nbsp;2014_Щёкино&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2015__#__foto/2015rt target=_blank>&nbsp;&nbsp;2015_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2016__#__foto/2016rt target=_blank>&nbsp;&nbsp;2016_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2017__#__foto/2017rt target=_blank>&nbsp;&nbsp;2017_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2018__#__foto/2018rt target=_blank>&nbsp;&nbsp;2018_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    <a class="bm" href=show.htm?__Фото__2019__#__foto/2019rt target=_blank>&nbsp;&nbsp;2019_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    </div>
+    <div id="bl2010c" style="position:absolute; top:15px; left:410px; display: none">
+     <a class="bm" href=show.htm?__Фото__2010__#__foto/2010rt target=_blank>&nbsp;&nbsp;2010_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+    </div>
+    <div id="bl2020" style="position:absolute; top:10px; left:410px; display: none">
+     <a class="bm" href=show.htm?__Фото__2020__#__foto/2020rt target=_blank>&nbsp;&nbsp;2020_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2020_Тамань__#__foto/2020_taman_rt target=_blank>&nbsp;&nbsp;2020_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2020_Тамань_сад_и_огород__#__foto/2020_tamuch_rt target=_blank>&nbsp;&nbsp;2020_Тамань_сад_и_огород&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2020_Воздремо__#__foto/2020_vozdremo_rt target=_blank>&nbsp;&nbsp;2020_Воздремо&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2020/03/02_Щёкино__#__foto/2020_03_02_schekino_rt target=_blank>&nbsp;&nbsp;2020/03/02_Щёкино&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2020/07/30_Щёкино__#__foto/2020_07_30_schekino_rt target=_blank>&nbsp;&nbsp;2020/07/30_Щёкино&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2021__#__foto/2021rt target=_blank>&nbsp;&nbsp;2021_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2021_ноябрь_вокруг_Тамани__#__foto/2021-11t target=_blank>&nbsp;&nbsp;2021_ноябрь_вокруг_Тамани&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2021_Тамань_с_высоты__#__foto/2021_hubsan_dnt target=_blank>&nbsp;&nbsp;2021_Тамань_с_высоты&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2022__#__foto/2022t target=_blank>&nbsp;&nbsp;2022_избранное&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2022_Тамань_с_высоты__#__foto/2022_habsan_dnt target=_blank>&nbsp;&nbsp;2022_Тамань_с_высоты&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2022_Тамань_#__foto/2022tamant target=_blank>&nbsp;&nbsp;2022_Тамань&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2022_Тамань_сад_и_огород__#__foto/2022_tamuch_t target=_blank>&nbsp;&nbsp;2022_Тамань_сад_и_огород&nbsp;&nbsp;</a><div class="sp3"> </div>
+     <a class="bm" href=show.htm?__Фото__2022_Тамань_набережная__#__foto/2022_taman-nab_t target=_blank>&nbsp;&nbsp;2022_Тамань_набережная&nbsp;&nbsp;</a><div class="sp3"> </div>
+    </div>
+    <div id="bl2020c" style="position:absolute; top:15px; left:410px; display: none">
+     <a class="bm" href=show.htm?__Фото__2021_ноябрь_вокруг_Тамани__#__foto/2021-11t target=_blank>&nbsp;&nbsp;2021_ноябрь_вокруг_Тамани&nbsp;&nbsp;</a><div class="sp3"> </div>
+    </div>
+    <p id="serv1" style="font-size:300%; display: none">serv1</p>
+  </body>
+</html>
