@@ -1,0 +1,10 @@
+document.write('<i>https://imgbb.su/images/2022/01/26/92fb75c3bf36718dcf019f319afda068.jpg</i><b>2005 CN30 01art</b>');
+document.write('<i>https://imgbb.su/images/2022/01/26/43c2ed4ef895bcde97c848aeb1876f8a.jpg</i><b>2005 CN30 01rt</b>');
+document.write('<i>https://imgbb.su/images/2022/01/26/114408e43f22e7b6472c14f3bac395d5.jpg</i><b>2005 CN30 02art</b>');
+document.write('<i>https://imgbb.su/images/2022/01/26/491153cd46cb7d3f9f5b11584a9244ce.jpg</i><b>2005 CN30 02rt</b>');
+document.write('<i>https://imgbb.su/images/2022/01/26/2877d097745f6b7287498a8190ff3d8c.jpg</i><b>2005 CN30 03art</b>');
+document.write('<i>https://imgbb.su/images/2022/01/26/576c63c6f4c00df4dd681229ccaf0fa0.jpg</i><b>2005 CN30 03rt</b>');
+document.write('<i>https://imgbb.su/images/2022/01/26/16fdd1a6ba032d7dfe437e4edf9da5bd.jpg</i><b>2005 CN30 04rt</b>');
+document.write('<i>https://imgbb.su/images/2022/01/26/2c2428d17835ed1b59ee930e384bc42b.jpg</i><b>2005 CN30 05rt</b>');
+document.write('<i>https://imgbb.su/images/2022/01/26/3dc56acd35de4bffd3dba84852c154ac.jpg</i><b>2005 CN30 06art</b>');
+document.write('<i>https://imgbb.su/images/2022/01/26/6d5d1dc5329fc822f2ffca1e4aa301fd.jpg</i><b>2005 CN30 06rt</b>');

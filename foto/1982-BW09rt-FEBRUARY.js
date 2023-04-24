@@ -1,0 +1,17 @@
+document.write('<i>https://imgbb.su/images/2021/12/29/7f4519445ccac627e1f4f3247037e7f0.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/645ad61ca4050519c86b4585cb4d0413.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/d6fcd59ea117eaade49eb274631711f5.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/c16e91601e8b930bc896631a1169a79c.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/a6561b74b026b9eb0ad58898f23e63af.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/12b5109de6e78f3a0065aa613eaa88ef.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/87e9866b429d6bd85bcba0642d3368d3.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/a2ecc2e17a64f39722636407e12e00e6.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/b998e99d6408566a3156970322941ab4.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/80f26f8c21145c3d283ae023998068d7.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/0ef6bacb486f9d7926697e01a6aace1b.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/4c75306284836e48e060b6f05c0bc72a.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/2ec69848703a9f55d99dcd4299c45ea6.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/d414609461ea41297d0e78954f76bf43.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/39e4c37463f281a4c8b65433973386a1.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/7621fcfcf150e24072b01c566f17ec42.jpg</i><b>1982 </b>');
+document.write('<i>https://imgbb.su/images/2021/12/29/b49c280e01f954eb8e6d88a1ceadaab1.jpg</i><b>1982 </b>');

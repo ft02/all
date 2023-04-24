@@ -1,0 +1,12 @@
+document.write('<i>https://imgbb.su/images/2022/01/06/eff5d57fc8d74c8881308e8a471d9eb7.jpg</i><b>1998 </b>');
+document.write('<i>https://imgbb.su/images/2022/01/06/a95983e10934555c5ca4556389cbe9fe.jpg</i><b>1998 </b>');
+document.write('<i>https://imgbb.su/images/2022/01/06/dcba826f3f57feacd25d8f4a075d6270.jpg</i><b>1998 </b>');
+document.write('<i>https://imgbb.su/images/2022/01/06/98ac82b5b0656d303fd987e5f1127b92.jpg</i><b>1998 </b>');
+document.write('<i>https://imgbb.su/images/2022/01/06/852590a5498d92f85e8ced5a83a3443b.jpg</i><b>1998 </b>');
+document.write('<i>https://imgbb.su/images/2022/01/06/d5f0585897f6118a0ec3f085ce880cae.jpg</i><b>1998 </b>');
+document.write('<i>https://imgbb.su/images/2022/01/06/140909c28d71e38b8119239438d0fadb.jpg</i><b>1998 </b>');
+document.write('<i>https://imgbb.su/images/2022/01/06/c976844b069e0c4300b4a34a5bfb5acc.jpg</i><b>1998 </b>');
+document.write('<i>https://imgbb.su/images/2022/01/06/05ea22e833ce047ca3f19cd73812dc95.jpg</i><b>1998 </b>');
+document.write('<i>https://imgbb.su/images/2022/01/06/80781ff040c3359a0af527634b5db7a9.jpg</i><b>1998 </b>');
+document.write('<i>https://imgbb.su/images/2022/01/06/9a9f20721dc6022a2849d8a9ec2df6ac.jpg</i><b>1998 </b>');
+document.write('<i>https://imgbb.su/images/2022/01/06/9110c1745de4f0423dee183926a9b6f9.jpg</i><b>1998 </b>');
